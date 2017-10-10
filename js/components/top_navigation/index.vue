@@ -1,25 +1,29 @@
 <template>
 	<div id="top-navigation">
-		<Navbar v-model="selected" class="top-navigation-bavbar">
-		  	<TabItem id="1">艺术家</TabItem>
-		  	<TabItem id="2">单曲</TabItem>
-		  	<TabItem id="3">语言年代</TabItem>
-		  	<TabItem id="4">风格</TabItem>
-		  	<TabItem id="5">心情</TabItem>
+		<Navbar v-model="d_selected" class="top-navigation-bavbar">
+		  	<TabItem v-for="item in data" :id="item.id">{{item.title}}</TabItem>
 		</Navbar>
 	</div>
 </template>
 <script>
 	import { Navbar, TabItem } from 'mint-ui';
 	export default {
+		props: {
+			data: '',
+		},
+		data: function(){
+			return {
+				d_selected: this.data ? this.data[0].id : '',
+			}
+		},
 		components: { 
 			Navbar,
 			TabItem,
 		},
-		data: ()=>{
-			return {
-				selected: '1',
-			}
+		watch:{
+			d_selected: function(val){
+				this.$emit('selectChange', val);
+			},
 		}
 	}
 </script>

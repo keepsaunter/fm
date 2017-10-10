@@ -1,29 +1,15 @@
 <template>
-	<Tabbar class="bottom-navigation" v-model="selected">
-	  <TabItem id="home">
-	    <img slot="icon" :src="ico_home">
-	    首页
-	  </TabItem>
-	  <TabItem id="search">
-	    <img slot="icon" :src="ico_home">
-	    搜索
-	  </TabItem>
-	  <TabItem id="start">
-	    <PlayBtn class="play-btn"></PlayBtn>
-	  </TabItem>
-	  <TabItem id="mylisten">
-	    <img slot="icon" :src="ico_home">
-	    我听
-	  </TabItem>
-	  <TabItem id="mine">
-	    <img slot="icon" :src="ico_home">
-	    我的
-	  </TabItem>
+	<Tabbar class="bottom-navigation" v-model="te">
+		<TabItem v-for="(item, key) in main_menu" :id="item.id">
+		    <PlayBtn v-if="key==2" class="play-btn"></PlayBtn>
+		    <img v-if="key!=2" slot="icon" :src="ico_home">
+		    {{item.title}}
+	  	</TabItem>
 	</Tabbar>
 </template>
 <script>
 	import { Tabbar, TabItem } from 'mint-ui';
-	import { mapGetters } from 'vuex';
+	import { mapGetters, mapState } from 'vuex';
 	import PlayBtn from '../common/playbtn';
 	export default {
 		components: {
@@ -31,12 +17,17 @@
 			TabItem,
 			PlayBtn
 		},
-		computed: mapGetters(['ico_home']),
-		data: () => {
-			return {
-				selected: '1'
+		computed: Object.assign({
+			te:{
+				get: function(){
+					return this.$store.state.main_menu_selected;
+				},
+				set: function(val){
+					this.$store.state.main_menu_selected = val;
+					return val;
+				}
 			}
-		}
+		}, mapGetters(['ico_home', 'main_menu'])),
 	}
 </script>
 <style lang="sass">

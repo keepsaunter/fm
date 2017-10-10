@@ -1,13 +1,19 @@
 <template>
 	<div>
-		<TabContainer v-model="selected">
-			<TabContainerItem id="1">
+		<TabContainer v-model="main_menu_selected">
+			<TabContainerItem id="home">
 				<Home></Home>
 			</TabContainerItem>
-		  	<TabContainerItem id="2">
-		    	<Cell v-for="n in 4" :title="'测试 ' + n" />
+		  	<TabContainerItem id="search">
+		    	<Search></Search>
 		  	</TabContainerItem>
-		  	<TabContainerItem id="3">
+		  	<TabContainerItem id="start">
+		    	<Cell v-for="n in 6" :title="'选项 ' + n" />
+		  	</TabContainerItem>
+		  	<TabContainerItem id="mylisten">
+		    	<Cell v-for="n in 6" :title="'选项 ' + n" />
+		  	</TabContainerItem>
+		  	<TabContainerItem id="mine">
 		    	<Cell v-for="n in 6" :title="'选项 ' + n" />
 		  	</TabContainerItem>
 		</TabContainer>
@@ -15,8 +21,10 @@
 	</div>
 </template>
 <script>
+	import { mapState } from 'vuex';
 	import { TabContainer, TabContainerItem, Cell } from 'mint-ui';
 	import Home from './home';
+	import Search from './search';
 	import BottomNav from '../bottom_navigation';
 	export default {
 		components: {
@@ -24,11 +32,27 @@
 			TabContainerItem,
 			Cell,
 			Home,
+			Search,
 			BottomNav
 		},
 		data: () => {
 			return {
-				selected: '1'
+				selected: '2'
+			}
+		},
+		filters:{
+			formatStr: function(str){
+				return '2'+str;
+			}
+		},
+		computed: {
+			main_menu_selected:{
+				get: function(){
+					return this.$store.state.main_menu_selected;
+				},
+				set: function(val){
+					this.$store.state.main_menu_selected = val;
+				}
 			}
 		}
 	}

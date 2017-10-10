@@ -1,6 +1,6 @@
 <template>
 	<div class="home-content-div">
-    	<ContentItem class="content-item" v-for="item in home_artists" :id="item.id" :img_url="item.cover" :title="item.name"></ContentItem>
+    	<ContentItem class="content-item" v-for="item in home_mood" :id="item.id" :img_url="item.cover" :title="item.name"></ContentItem>
 	</div>
 </template>
 <script>
@@ -11,12 +11,12 @@
 		components: {
 			ContentItem
 		},
-		computed: mapGetters([ 'home_artists' ]),
+		computed: mapGetters([ 'home_mood' ]),
 		created: function(){
 			Indicator.open({
 				spinnerType: 'fading-circle'
 			});
-			this.$store.dispatch('getHomeArtists');
+			this.$store.dispatch('getHomeMood');
 		},
 		updated:function(){
 			Indicator.close();
