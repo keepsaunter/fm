@@ -19,7 +19,8 @@ const state = {
 		img_urL: '',
 		bk_img_urL: '',
 		title: '',
-		name: ''
+		artist: '',
+		channel_name: ''
 	}
 }
 

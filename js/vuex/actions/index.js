@@ -5,17 +5,12 @@ export default {
 		song_info:{id,img_url,title}
 	*/
 	listenSong: (context, song_info) => {
-		let data = {
-			channel: song_info.id,
-			kbps:128,
-			client: 's:mainsite|y:3.0',
-			app_name: 'radio_website',
-			version: 100,
-			type: 'n'
-		}
-		axios.get(context.getters.listen_info_url+"?"+urlEncode(data))
+		context.commit('mainMenuSelectUpdate', 'start');
+		let listen_info_cofig = context.getters.listen_info;
+		axios.get(listen_info_cofig.url+"&channel="+song_info.id+"&"+urlEncode(listen_info_cofig.params))
 			.then(function(res){
-				console.log(res);
-			})
+				context.commit('updateListening', Object.assign({}, song_info,res.data.song[0]));
+			}
+		)
 	}
 }

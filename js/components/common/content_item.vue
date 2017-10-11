@@ -18,7 +18,7 @@
 		methods: {
 			startListen: function(){
 				if(!this.id) return;
-				this.$store.dispatch('listenSong', {id:this.id, img_url: this.img_url, title:this.title});
+				this.$store.dispatch('listenSong', {id:this.id, img_url: this.img_url, channel_name:this.title});
 			}
 		}
 	}

@@ -8,7 +8,7 @@
 		    	<Search></Search>
 		  	</TabContainerItem>
 		  	<TabContainerItem id="start">
-		    	<Cell v-for="n in 6" :title="'选项 ' + n" />
+		    	<Listening></Listening>
 		  	</TabContainerItem>
 		  	<TabContainerItem id="mylisten">
 		    	<Cell v-for="n in 6" :title="'选项 ' + n" />
@@ -25,6 +25,7 @@
 	import { TabContainer, TabContainerItem, Cell } from 'mint-ui';
 	import Home from './home';
 	import Search from './search';
+	import Listening from './listening';
 	import BottomNav from '../bottom_navigation';
 	export default {
 		components: {
@@ -33,12 +34,8 @@
 			Cell,
 			Home,
 			Search,
+			Listening,
 			BottomNav
-		},
-		data: () => {
-			return {
-				selected: '2'
-			}
 		},
 		filters:{
 			formatStr: function(str){
