@@ -1,6 +1,6 @@
 <template>
 	<Tabbar class="bottom-navigation" v-model="te">
-		<TabItem v-for="(item, key) in main_menu" :id="item.id">
+		<TabItem :class="key==2?'no-background-item':''" v-for="(item, key) in main_menu" :id="item.id">
 		    <PlayBtn v-if="key==2" class="play-btn"></PlayBtn>
 		    <img v-if="key!=2" slot="icon" :src="ico_home">
 		    {{item.title}}
@@ -45,6 +45,9 @@
 			position: absolute;
 		    bottom: 0;left: 50%;
 		    transform: translate(-50%, 0%);
+		}
+		.no-background-item{
+			background-color: transparent !important;
 		}
 	}
 </style>

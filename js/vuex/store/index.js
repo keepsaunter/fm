@@ -7,6 +7,7 @@ import RemoteRes from './remote_res';
 
 import mutations from '../mutations';
 import actions from '../actions';
+import getters from '../getters';
 
 Vue.use(Vuex);
 
@@ -16,11 +17,14 @@ const state = {
 	listeningSong:{
 		id: '',
 		res_url: '',
-		img_urL: '',
-		bk_img_urL: '',
+		img_url: ResourcePath.state.img_earphone,
+		bk_img_url: '',
 		title: '',
 		artist: '',
-		channel_name: ''
+		channel_name: '',
+		current_time: 0,
+		duration: 0,
+		is_listen: false,
 	}
 }
 
@@ -34,4 +38,5 @@ export default new Vuex.Store({
 	state,
 	mutations,
 	actions,
+	getters,
 })

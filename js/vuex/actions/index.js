@@ -12,5 +12,18 @@ export default {
 				context.commit('updateListening', Object.assign({}, song_info,res.data.song[0]));
 			}
 		)
+	},
+	startBtnClickTrigger: (context) => {
+		console.log(context);
+		let t_state = context.state;
+		if(t_state.listeningSong.id){
+			if(t_state.main_menu_selected !== 'start'){
+				context.commit('mainMenuSelectUpdate', 'start');
+				if(!t_state.listeningSong.is_listen)
+					context.commit('updateListenState');
+			}else{
+				context.commit('updateListenState');
+			}
+		}
 	}
 }

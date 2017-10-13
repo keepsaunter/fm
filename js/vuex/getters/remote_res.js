@@ -5,4 +5,5 @@ export default {
 	home_mood: state => state.home_mood.data,
 	home_style: state => state.home_style.data,
 	listen_info: state => state.listen_info,
+	rewrite_img_url: state => state.rewrite_img_url,
 }
