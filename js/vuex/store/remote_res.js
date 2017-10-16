@@ -26,7 +26,7 @@ const state = {
 		url: json_bird_url+douban_channels_res+'genre',
 		data: [],
 	},
-	listen_info:{
+	listen_info: {
 		url: json_bird_url+'https://api.douban.com/v2/fm/playlist',
 		params: {
 			from: 'mainsite',
@@ -44,6 +44,9 @@ const state = {
 			version: 115,// version: 100,
 			type: 'n'
 		}
+	},
+	music_lyric_config: {
+		url: json_bird_url+'https://api.douban.com/v2/fm/lyric'
 	}
 }
 export default {

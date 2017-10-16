@@ -24,6 +24,7 @@ const state = {
 		channel_name: '',
 		current_time: 0,
 		duration: 0,
+		lyric: '',
 		is_listen: false,
 	}
 }

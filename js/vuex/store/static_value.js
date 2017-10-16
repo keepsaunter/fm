@@ -1,4 +1,5 @@
 import getters from '../getters/static_value';
+import resource_path from './resource_path';
 const state = {
 	home_top_navigation: [
 		{ title: "艺术家", id: 'artist' },

@@ -1,3 +1,4 @@
+import { rewriteImgUrl } from '../../lib';
 export default {
 	homeSelectUpdate: (state, val) => {
 		state.homepage_selected = val;
@@ -6,20 +7,28 @@ export default {
 		state.main_menu_selected = val;
 	},
 	updateListening: (state, val) => {
-		console.log(val);
+		let bk_img_url = rewriteImgUrl(val.picture);
+
+		let img= document.createElement('img');
+		img.src = bk_img_url;
+
 		state.listeningSong = {
 			id: val.id,
 			res_url: val.url,
 			img_url: val.img_url,
-			bk_img_url: val.picture,
+			bk_img_url: bk_img_url,
 			title: val.title,
 			artist: val.artist,
 			channel_name: val.channel_name,
 			current_time: 0,
 			duration: 0,
+			lyric: '',
 			is_listen: true,
 		}
-		console.log(state.listeningSong);
+	},
+	/*更新歌词，为多个音频来源做准备*/
+	updateListeningLyric: (state, val) => {
+		state.listeningSong.lyric = val;
 	},
 	updateListenDuration: (state, val) => {
 		if(state.listeningSong.duration === 0 && val)

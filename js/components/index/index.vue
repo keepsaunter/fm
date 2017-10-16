@@ -17,7 +17,7 @@
 		    	<Cell v-for="n in 6" :title="'选项 ' + n" />
 		  	</TabContainerItem>
 		</TabContainer>
-		<BottomNav class="bottom-navigation"></BottomNav>
+		<BottomNav v-show="main_menu_selected!='start'" class="bottom-navigation"></BottomNav>
 	</div>
 </template>
 <script>

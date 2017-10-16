@@ -1,8 +1,8 @@
 <template>
-	<Tabbar class="bottom-navigation" v-model="te">
+	<Tabbar class="bottom-navigation" v-model="main_menu_selected">
 		<TabItem :class="key==2?'no-background-item':''" v-for="(item, key) in main_menu" :id="item.id">
 		    <PlayBtn v-if="key==2" class="play-btn"></PlayBtn>
-		    <img v-if="key!=2" slot="icon" :src="ico_home">
+		    <img v-if="key!=2" slot="icon" :src="item.icon">
 		    {{item.title}}
 	  	</TabItem>
 	</Tabbar>
@@ -18,7 +18,7 @@
 			PlayBtn
 		},
 		computed: Object.assign({
-			te:{
+			main_menu_selected:{
 				get: function(){
 					return this.$store.state.main_menu_selected;
 				},
@@ -30,7 +30,7 @@
 		}, mapGetters(['ico_home', 'main_menu'])),
 	}
 </script>
-<style lang="sass">
+<style lang="sass" scoped>
 	@import '../../../scss/variable.scss';
 	.bottom-navigation{
 		background-color: $theme_color_grey;
