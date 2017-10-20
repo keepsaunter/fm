@@ -7,4 +7,5 @@ export default {
 		return fomatTime(state.listeningSong.duration);
 	},
 	main_menu_selected: state => state.main_menu_selected,
+	search_state: state => state.search_state,
 }

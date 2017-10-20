@@ -44,5 +44,20 @@ export default {
 			if(state.listeningSong.is_listen !== val)
 				state.listeningSong.is_listen = val;
 		}
-	}
+	},
+	updateSearchSelect: (state, id) => {
+		if(state.search_state.select != id)
+			state.search_state.select = id;
+	},
+	updateSearchKeyword: (state, words) => {
+		let tmp = state.search_state.keywords;
+		let index = tmp.indexOf(words);
+		if(index != -1){
+			tmp.splice(index, 1);
+			tmp.unshift(words);
+		}else{
+			tmp.push(words);
+		}
+		state.search_state.keywords = tmp;
+	},
 }

@@ -1,15 +1,25 @@
 <template>
 	<div class="search-input-div">
-		<input class="search-input-input" type="" name="">
-		<Mbutton class="search-input-button">搜索</Mbutton>
+		<input v-model="search_input_val" placeholder="艺术家姓名" class="search-input-input" type="" name="">
+		<Mbutton class="search-input-button" @click="searchBtnClick">搜索</Mbutton>
 	</div>
 </template>
 <script>
 	import { Button } from 'mint-ui';
 	export default {
+		data: ()=>{
+			return {
+				search_input_val: '',
+			}
+		},
 		components: {
 			Mbutton: Button,
 		},
+		methods: {
+			searchBtnClick: function(){
+				this.$emit('searchEvent', this.search_input_val);
+			}
+		}
 	}
 </script>
 <style>

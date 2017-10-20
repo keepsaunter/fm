@@ -47,6 +47,11 @@ const state = {
 	},
 	music_lyric_config: {
 		url: json_bird_url+'https://api.douban.com/v2/fm/lyric'
+	},
+	search_music: {
+		url: json_bird_url+'https://douban.fm/j/v2/query/',
+		result_limit: 5,
+		data: {}
 	}
 }
 export default {

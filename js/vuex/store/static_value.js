@@ -16,11 +16,11 @@ const state = {
 		{ title: "我的", id: "mine"},
 	],
 	search_classify: [
+		{ title: "全部", id: "all"},
 		{ title: "艺术家", id: "artist"},
-		{ title: "单曲", id: "single"},
+		{ title: "单曲", id: "song"},
+		{ title: "兆赫", id: "channel"},
 		{ title: "歌单", id: "songlist"},
-		{ title: "兆赫", id: "mhz"},
-		{ title: "唱片", id: "record"},
 	]
 }
 export default {

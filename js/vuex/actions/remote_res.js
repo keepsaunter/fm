@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { urlEncode } from '../../lib';
+import binlyric from '../../binlyric';
 export default {
 	getHomeArtists: context => {
 		if(context.state.home_artists.data.length) return;
@@ -42,8 +43,6 @@ export default {
 		axios.get(listen_info_cofig.url+"&channel="+song_info.id+"&"+urlEncode(listen_info_cofig.params))
 			.then(function(res){
 				let data = res.data.song[0];
-				// console.log(song_info);
-				// console.log(data);
 				context.commit('updateListening', Object.assign({}, song_info, data));
 				context.dispatch('getMusicLyric', {sid: data.sid, ssid: data.ssid})
 			}
@@ -55,6 +54,31 @@ export default {
 			.then(function(res){
 				console.log(res);
 				context.commit('updateListeningLyric', res.data.lyric);
+				// console.log(res.data.lyric);
+				// binlyric.txt = res.data.lyric;
+				// console.log(binlyric.analysis());
+			}
+		)
+	},
+	searchMusic: (context, words) => {
+		let search_music = context.state.search_music;
+		let search_state = context.getters.search_state;
+		axios.get(search_music.url+search_state.select+"?q="+words+"&start=0&limit="+search_music.result_limit)
+			.then(function(res){
+				console.log(res);
+				context.commit('updateSearchMusicData', res.data);
+				context.commit('updateSearchKeyword', words);
+			}
+		)
+	},
+	searchMusicMore: (context, type) => {
+		let search_music = context.state.search_music;
+		let search_state = context.getters.search_state;
+		axios.get(search_music.url+type+"?q="+search_state.keywords[0]+"&start="+search_music.data[type].length+"&limit="+search_music.result_limit)
+			.then(function(res){
+				console.log(res);
+				let data = res.data;
+				context.commit('updateSearchMusicDataMore', data);
 			}
 		)
 	}

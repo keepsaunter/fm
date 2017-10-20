@@ -26,6 +26,10 @@ const state = {
 		duration: 0,
 		lyric: '',
 		is_listen: false,
+	},
+	search_state: {
+		select: StaticValue.state.search_classify[0].id,
+		keywords: [],
 	}
 }
 

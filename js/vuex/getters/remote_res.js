@@ -7,4 +7,5 @@ export default {
 	listen_info: state => state.listen_info,
 	music_lyric_config: state => state.music_lyric_config,
 	rewrite_img_url: state => state.rewrite_img_url,
+	search_result_data: state => state.search_music.data,
 }
