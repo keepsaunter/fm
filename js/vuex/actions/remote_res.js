@@ -74,7 +74,7 @@ export default {
 	searchMusicMore: (context, type) => {
 		let search_music = context.state.search_music;
 		let search_state = context.getters.search_state;
-		axios.get(search_music.url+type+"?q="+search_state.keywords[0]+"&start="+search_music.data[type].length+"&limit="+search_music.result_limit)
+		axios.get(search_music.url+type+"?q="+search_state.keywords[0]+"&start="+search_music.data[type].items.length+"&limit="+search_music.result_limit)
 			.then(function(res){
 				console.log(res);
 				let data = res.data;

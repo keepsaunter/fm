@@ -32,6 +32,7 @@
 		border-radius: 0;
 		border-bottom-left-radius: 10px;
     	border-top-left-radius: 10px;
+    	padding-left: 0.1rem;
     	outline: none;
 	}
 	.search-input-button{

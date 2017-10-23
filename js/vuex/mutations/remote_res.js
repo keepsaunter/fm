@@ -1,3 +1,4 @@
+import Vue from 'vue';
 export default {
 	updateHomeArtists: (state, new_val) => {
 		state.home_artists.data = new_val;
@@ -32,9 +33,16 @@ export default {
 		state.search_music.data = tmp;
 	},
 	updateSearchMusicDataMore: (state, data) => {
+		console.log(data);
 		let temp = state.search_music.data;
 		temp[data.type].items = temp[data.type].items.concat(data.items);
 		temp[data.type].total = data.total;
-		state.search_music.data = temp;
+		console.log(temp);
+		// state.search_music.data = temp;
+		Vue.set(state, 'search_music', {
+			data:temp,
+			url:state.search_music.url,
+			result_limit: state.search_music.result_limit
+		});
 	}
 }

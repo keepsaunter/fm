@@ -2,6 +2,7 @@ import getters from '../getters/remote_res';
 import actions from '../actions/remote_res';
 import mutations from '../mutations/remote_res';
 
+// const json_bird_url = "/backstage/cross_domain.php?url";
 const json_bird_url = "https://bird.ioliu.cn/v1/?url=";
 const douban_channels_res = 'https://douban.fm/j/v2/rec_channels?specific=';
 const state = {

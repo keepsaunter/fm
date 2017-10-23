@@ -3,13 +3,11 @@
 		<TopNavigation @selectChange="selectChange" class="top-navigation" :data="home_top_navigation"></TopNavigation>
 		<TabContainer v-model="top_navi_selected">
 			<TabContainerItem v-for="item in home_top_navigation" :style="{height:(screen_height-17)/100+'rem'}" :id="item.id">
-				<transition name="fold">
-					<HomeArtist v-if="item.id == 'artist'" key="artist"></HomeArtist>
-				</transition>
-					<HomeSingle v-if="item.id == 'single'" key="single"></HomeSingle>
-					<HomeLanguage v-if="item.id == 'language'" key="language"></HomeLanguage>
-					<HomeStyle v-if="item.id == 'style'" key="style"></HomeStyle>
-					<HomeMood v-if="item.id == 'mood'" key="mood"></HomeMood>
+				<HomeContent v-if="item.id == 'artist'" key_name="Artist" :data="eval('artists')"></HomeContent>
+				<HomeContent v-if="item.id == 'single'" key_name="Single" :data="home_single"></HomeContent>
+				<HomeContent v-if="item.id == 'language'" key_name="Language" :data="home_language"></HomeContent>
+				<HomeContent v-if="item.id == 'style'" key_name="Style" :data="home_style"></HomeContent>
+				<HomeContent v-if="item.id == 'mood'" key_name="Mood" :data="home_mood"></HomeContent>
 			</TabContainerItem>
 		</TabContainer>
 	</div>
@@ -18,21 +16,29 @@
 	import { mapGetters, mapState } from 'vuex';
 	import { Navbar, TabItem, TabContainer, TabContainerItem, Cell } from 'mint-ui';
 	import TopNavigation from '../top_navigation';
-	import HomeArtist from '../content/home_artist';
-	import HomeSingle from '../content/home_single';
-	import HomeLanguage from '../content/home_language';
-	import HomeStyle from '../content/home_style';
-	import HomeMood from '../content/home_mood';
+	import HomeContent from '../content/home_content';
 	export default {
 		components: {
 			TopNavigation,
 			TabContainer,
 			TabContainerItem,
-			HomeArtist, HomeSingle, HomeLanguage, HomeStyle, HomeMood,
+			HomeContent,
 			Cell,
 		},
+		created: function(){
+			this.$store.dispatch('getHomeArtists');
+		},
+		mounted: function(){
+			let self = this;
+			setTimeout(function(){
+				self.$store.dispatch('getHomeSingle');
+				self.$store.dispatch('getHomeLanguage');
+				self.$store.dispatch('getHomeStyle');
+				self.$store.dispatch('getHomeMood');
+			}, 100);
+		},
 		computed: {
-			...mapGetters(['screen_height', 'home_top_navigation']),
+			...mapGetters(['home_artists', 'home_single', 'home_language', 'home_style', 'home_mood', 'screen_height', 'home_top_navigation']),
 			...mapState([ 'homepage_selected' ]),
 			top_navi_selected: {
 				set: function(val){
@@ -47,6 +53,9 @@
 			selectChange: function(val){
 				this.top_navi_selected = val;
 			},
+			eval: function(val){
+				return eval('this.home_'+val);
+			}
 		}
 	}
 </script>
@@ -59,34 +68,4 @@
 	.mint-tab-container{
     	overflow: auto;
 	}
-	.fold-enter-active {
-  animation-name: fold-in;
-  animation-duration: .5s;
-}
-.fold-leave-active {
-  animation-name: fold-out;
-  animation-duration: .5s;
-}
-@keyframes fold-in {
-  0% {
-    transform: translate3d(0, 100%, 0);
-  }
-  50% {
-    transform: translate3d(0, 50%, 0);
-  }
-  100% {
-    transform: translate3d(0, 0, 0);
-  }
-}
-@keyframes fold-out {
-  0% {
-    transform: translate3d(0, 0, 0);
-  }
-  50% {
-    transform: translate3d(0, 50%, 0);
-  }
-  100% {
-    transform: translate3d(0, 100%, 0);
-  }
-}
 </style>

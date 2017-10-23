@@ -1,11 +1,14 @@
 <template>
 	<div class="item-div" @click="startListen">
-		<div class="item-img-div" :style="{backgroundImage:'url('+(img_url?img_url:ico_home)+')'}"></div>
+		<div class="item-img-div">
+			<img ref="item_img" class="item-img-div-img" :src="img_url?img_url:ico_home">
+		</div>
 		<p class="item-title">{{title}}</p>
 	</div>
 </template>
 <script>
 	import { mapGetters } from 'vuex';
+	import { rewriteImgUrl } from '../../lib';
 	export default {
 		props: {
 			id: '',
@@ -14,12 +17,19 @@
 				default: 'test'
 			}
 		},
-		computed: mapGetters(['ico_home']),
+		mounted: function(){
+			this.$refs.item_img.onerror = function(){
+				this.src = rewriteImgUrl(this.src);
+			}
+		},
+		computed: {
+			...mapGetters(['ico_home']),
+		},
 		methods: {
 			startListen: function(){
 				if(!this.id) return;
 				this.$store.dispatch('listenSong', {id:this.id, img_url: this.img_url, channel_name:this.title});
-			}
+			},
 		}
 	}
 </script>
@@ -36,10 +46,14 @@
 		text-align: center;
 	}
 	.item-img-div{
+		margin: auto;
 		width: $content_item_img_width;
 		height: $content_item_img_width;
-		margin: auto;
-		background-size: 100% 100%;
+	}
+	.item-img-div-img{
+		float: left;
+		width: $content_item_img_width;
+		height: $content_item_img_width;
 		border-radius: 50%;
 	}
 	.item-title{
