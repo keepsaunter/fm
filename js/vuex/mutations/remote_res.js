@@ -1,7 +1,7 @@
 import Vue from 'vue';
 export default {
-	updateHomeArtists: (state, new_val) => {
-		state.home_artists.data = new_val;
+	updateHomeArtist: (state, new_val) => {
+		state.home_artist.data = new_val;
 	},
 	updateHomeSingle: (state, new_val) => {
 		state.home_single.data = new_val;

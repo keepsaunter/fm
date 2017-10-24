@@ -7,7 +7,7 @@ const json_bird_url = "https://bird.ioliu.cn/v1/?url=";
 const douban_channels_res = 'https://douban.fm/j/v2/rec_channels?specific=';
 const state = {
 	rewrite_img_url: 'http://images.weserv.nl/?url=',
-	home_artists: {
+	home_artist: {
 		url: json_bird_url+douban_channels_res+'artist',
 		data: [],
 	},

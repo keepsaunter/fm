@@ -3,11 +3,11 @@
 		<TopNavigation @selectChange="selectChange" class="top-navigation" :data="home_top_navigation"></TopNavigation>
 		<TabContainer v-model="top_navi_selected">
 			<TabContainerItem v-for="item in home_top_navigation" :style="{height:(screen_height-17)/100+'rem'}" :id="item.id">
-				<HomeContent v-if="item.id == 'artist'" key_name="Artist" :data="eval('artists')"></HomeContent>
-				<HomeContent v-if="item.id == 'single'" key_name="Single" :data="home_single"></HomeContent>
-				<HomeContent v-if="item.id == 'language'" key_name="Language" :data="home_language"></HomeContent>
-				<HomeContent v-if="item.id == 'style'" key_name="Style" :data="home_style"></HomeContent>
-				<HomeContent v-if="item.id == 'mood'" key_name="Mood" :data="home_mood"></HomeContent>
+				<HomeContent v-if="item.id == 'artist'" key_name="artist" :data="home_artist"></HomeContent>
+				<HomeContent v-if="item.id == 'single'" key_name="single" :data="home_single"></HomeContent>
+				<HomeContent v-if="item.id == 'language'" key_name="language" :data="home_language"></HomeContent>
+				<HomeContent v-if="item.id == 'style'" key_name="style" :data="home_style"></HomeContent>
+				<HomeContent v-if="item.id == 'mood'" key_name="mood" :data="home_mood"></HomeContent>
 			</TabContainerItem>
 		</TabContainer>
 	</div>
@@ -26,19 +26,19 @@
 			Cell,
 		},
 		created: function(){
-			this.$store.dispatch('getHomeArtists');
+			this.$store.dispatch('getHomeList', 'artist');
 		},
 		mounted: function(){
 			let self = this;
 			setTimeout(function(){
-				self.$store.dispatch('getHomeSingle');
-				self.$store.dispatch('getHomeLanguage');
-				self.$store.dispatch('getHomeStyle');
-				self.$store.dispatch('getHomeMood');
+				self.$store.dispatch('getHomeList', 'single');
+				self.$store.dispatch('getHomeList', 'language');
+				self.$store.dispatch('getHomeList', 'style');
+				self.$store.dispatch('getHomeList', 'mood');
 			}, 100);
 		},
 		computed: {
-			...mapGetters(['home_artists', 'home_single', 'home_language', 'home_style', 'home_mood', 'screen_height', 'home_top_navigation']),
+			...mapGetters(['home_artist', 'home_single', 'home_language', 'home_style', 'home_mood', 'screen_height', 'home_top_navigation']),
 			...mapState([ 'homepage_selected' ]),
 			top_navi_selected: {
 				set: function(val){
@@ -53,9 +53,6 @@
 			selectChange: function(val){
 				this.top_navi_selected = val;
 			},
-			eval: function(val){
-				return eval('this.home_'+val);
-			}
 		}
 	}
 </script>

@@ -1,5 +1,5 @@
 export default {
-	home_artists: state => state.home_artists.data,
+	home_artist: state => state.home_artist.data,
 	home_single: state => state.home_single.data,
 	home_language: state => state.home_language.data,
 	home_mood: state => state.home_mood.data,

@@ -2,11 +2,17 @@ import axios from 'axios';
 import { urlEncode } from '../../lib';
 import binlyric from '../../binlyric';
 export default {
-	getHomeArtists: context => {
-		if(context.state.home_artists.data.length) return;
-		axios.get(context.state.home_artists.url)
+	getHomeList: (context, type) => {
+		axios.get(context.state['home_'+type].url)
 			.then(function(res){
-				context.commit('updateHomeArtists', res.data.data.channels);
+				context.commit('updateHome'+type[0].toUpperCase()+type.slice(1), res.data.data.channels);
+			})
+	},
+	getHomeArtist: context => {
+		if(context.state.home_artist.data.length) return;
+		axios.get(context.state.home_artist.url)
+			.then(function(res){
+				context.commit('updateHomeArtist', res.data.data.channels);
 			})
 	},
 	getHomeSingle: context => {
@@ -63,7 +69,8 @@ export default {
 	searchMusic: (context, words) => {
 		let search_music = context.state.search_music;
 		let search_state = context.getters.search_state;
-		axios.get(search_music.url+search_state.select+"?q="+words+"&start=0&limit="+search_music.result_limit)
+		// axios.get(search_music.url+search_state.select+"?q="+words+"&start=0&limit="+search_music.result_limit)
+		axios.get(search_music.url+"all?q="+words+"&start=0&limit="+search_music.result_limit)
 			.then(function(res){
 				console.log(res);
 				context.commit('updateSearchMusicData', res.data);
