@@ -1,23 +1,48 @@
 <template>
 	<div class="listening-bottom">
+		<img @click='updateVolume(-0.1)' class="item-icon" :src="ico_volume_sm">
 		<img class="item-icon" :src="ico_list">
-		<img class="item-icon" :src="ico_previous">
+		<!-- <img class="item-icon" :src="ico_previous"> -->
 		<div style="width:16%">
 			<PlayBtn class="play-btn"></PlayBtn>
 		</div>
-		<img class="item-icon" :src="ico_next">
-		<img class="item-icon" :src="ico_trumpet">
+		<Range ref='volume_range' class='volume-range' v-model="play_volume" :min="0" :max="1" :step="0.1"></Range>
+		<img @click='listenNext' class="item-icon" :src="ico_next">
+		<img @click='updateVolume(0.1)' class="item-icon" :src="ico_volume_bg">
 	</div>
 </template>
 <script>
-	import { Tabbar, TabItem } from 'mint-ui';
+	import { Tabbar, TabItem, Range } from 'mint-ui';
 	import { mapGetters, mapState } from 'vuex';
 	import PlayBtn from '../common/playbtn';
 	export default {
 		components: {
-			PlayBtn
+			PlayBtn,
+			Range
 		},
-		computed: mapGetters(['ico_home', 'main_menu', 'ico_list', 'ico_previous', 'ico_next', 'ico_trumpet']),
+		data:()=>{
+			return {
+				test: 30,
+			}
+		},
+		computed: mapGetters(['play_volume', 'ico_home', 'main_menu', 'ico_volume_sm', 'ico_list', 'ico_next', 'ico_volume_bg']),
+		methods: {
+			updateVolume: function(value){
+				this.$store.commit('updatePlayVolume', value);
+
+				let ele = this.$refs.volume_range.$el;
+				ele.style.opacity=1;
+				let timer1 = setInterval(function(){
+					ele.style.opacity -= (1.1-ele.style.opacity)/4;
+					if(ele.style.opacity <= 0){
+						clearInterval(timer1);
+					}
+				}, 200)
+			},
+			listenNext: function(){
+				this.$store.dispatch('getNextListen');
+			}
+		},
 	}
 </script>
 <style lang="sass">
@@ -42,6 +67,13 @@
 		}
 		.no-background-item{
 			background-color: transparent !important;
+		}
+		.volume-range{
+			position:absolute;
+			width: 80%;
+			top: -40px;
+    		z-index: 8888;
+    		opacity: 0;
 		}
 	}
 </style>

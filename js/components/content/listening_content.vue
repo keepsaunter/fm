@@ -1,26 +1,19 @@
 <template>
 	<div class="listening-content-div">
 		<img :src="img_listen_bk" style="width:100%;">
-		<audio ref="ref_fm_audio" @timeupdate="listenTimeUpdate" style="width:100%;height:46px;color:red !import" autoplay :src="listeningSong.res_url"></audio>
+		<audio id="audio" ref="ref_fm_audio" @timeupdate="listenTimeUpdate" style="width:100%;height:46px;color:red !import" autoplay :src="listeningSong.res_url"></audio>
 		<div class="listening-detail-info-div">
 			<p style="font-size: 0.168rem;">{{listeningSong.title}}</p>
 			<p style="margin:0.06rem 0 0.2rem 0;">{{'—— '+listeningSong.artist+' ——'}}</p>
 			<div class="listening-lyric-div">{{listeningSong.lyric}}</div>
 		</div>
-		<!--<div> 
-			<span>{{current_time}}</span>
-			<span>{{duration}}</span>
-		</div>
-		<p>{{listeningSong.title}}</p>
-		<p>{{listeningSong.artist}}</p>
-		<p>{{listeningSong.channel_name}}</p> -->
 	</div>
 </template>
 <script>
 	import { mapState, mapGetters } from 'vuex';
 	export default {
 		computed: {
-			...mapState([ 'listeningSong' ]),
+			...mapState([ 'listeningSong', 'play_volume']),
 			...mapGetters(['current_time', 'duration', 'img_listen_bk']),
 		},
 		methods: {
@@ -44,6 +37,9 @@
 				},
 				deep:true,
 			},
+			play_volume: function(val){
+				this.$refs.ref_fm_audio.volume = val;
+			}
 		}
 	}
 </script>

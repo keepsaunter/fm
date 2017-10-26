@@ -8,4 +8,6 @@ export default {
 	},
 	main_menu_selected: state => state.main_menu_selected,
 	search_state: state => state.search_state,
+	search_history: state => state.search_state.keywords,
+	play_volume: state => state.play_volume,
 }

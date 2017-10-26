@@ -1,28 +1,47 @@
 <template>
 	<div class="search-input-div">
-		<input v-model="search_input_val" placeholder="艺术家姓名" class="search-input-input" type="" name="">
+		<input @focus='serchInputTrigger' @blur='serchInputTrigger' v-model="search_input_val" placeholder="艺术家姓名" class="search-input-input" type="" name="">
 		<Mbutton class="search-input-button" @click="searchBtnClick">搜索</Mbutton>
+		<AutoComplete @itemClick="autoCompItemClick" @clearAll="clearAutoCompleteAll" v-show="auto_complete_show" :data="search_history" class="auto-complete-component"></AutoComplete>
 	</div>
 </template>
 <script>
 	import { Button } from 'mint-ui';
+	import AutoComplete from './auto_complete_fragment';
 	export default {
-		data: ()=>{
-			return {
-				search_input_val: '',
-			}
+		props: {
+			search_history: '',
 		},
 		components: {
 			Mbutton: Button,
+			AutoComplete,
+		},
+		data: ()=>{
+			return {
+				search_input_val: '',
+				auto_complete_show: false,
+			}
 		},
 		methods: {
 			searchBtnClick: function(){
 				this.$emit('searchEvent', this.search_input_val);
+			},
+			serchInputTrigger: function(){
+				let self = this;
+				setTimeout(function(){
+					self.auto_complete_show = !self.auto_complete_show;
+				},0)
+			},
+			clearAutoCompleteAll: function(){
+				this.$emit('clearAutoCompleteAll');
+			},
+			autoCompItemClick: function(val){
+				this.search_input_val = val;
 			}
 		}
 	}
 </script>
-<style>
+<style lang='scss' scoped>
 	.search-input-div{
 		display: flex;
 		padding: 4px 4px;
@@ -45,5 +64,15 @@
     	outline: none;
     	border-style: inset;
     	border-width: 2px;
+	}
+	.auto-complete-component{
+		position: absolute;
+    	top: 46px;
+    	left: 5px;
+    	right: 5px;
+    	z-index: 8888;
+    	border: solid white;
+    	border-radius: 4px;
+    	padding: 1px;
 	}
 </style>

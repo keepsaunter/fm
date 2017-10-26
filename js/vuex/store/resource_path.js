@@ -14,6 +14,10 @@ const state = {
 	ico_next: require('../../../static/ico/ico_next.png'),
 	ico_trumpet: require('../../../static/ico/ico_trumpet.png'),
 	ico_more: require('../../../static/ico/ico_more.png'),
+	ico_volume_bg: require('../../../static/ico/ico_volume_bg.png'),
+	ico_volume_sm: require('../../../static/ico/ico_volume_sm.png'),
+	ico_volume_no: require('../../../static/ico/ico_volume_no.png'),
+
 	img_earphone: require('../../../static/img/img_earphone.png'),
 	img_music: require('../../../static/img/img_music.png'),
 	img_listen_bk: require('../../../static/img/img_listen_bk.jpg'),

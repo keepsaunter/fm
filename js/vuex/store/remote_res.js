@@ -46,6 +46,21 @@ const state = {
 			type: 'n'
 		}
 	},
+	listen_info2: {
+		url: json_bird_url+'https://douban.fm/j/v2/playlist',
+		params: {
+			channel:'',
+			kbps: 128,
+			client: 's:mainsite|y:3.0',
+			app_name: 'radio_website',
+			version: 100,
+			type: 's',
+			sid: '',
+			pt: '',
+			pb: 128,
+			apikey:''
+		}
+	},
 	music_lyric_config: {
 		url: json_bird_url+'https://api.douban.com/v2/fm/lyric'
 	},

@@ -8,18 +8,17 @@ export default {
 	},
 	updateListening: (state, val) => {
 		let bk_img_url = rewriteImgUrl(val.picture);
-
-		let img= document.createElement('img');
-		img.src = bk_img_url;
+		let temp = state.listeningSong;
 
 		state.listeningSong = {
-			id: val.id,
+			id: val.id?val.id:temp.id,
+			sid: val.sid,
 			res_url: val.url,
-			img_url: val.img_url,
+			img_url: val.img_url?val.img_url:temp.img_url,
 			bk_img_url: bk_img_url,
 			title: val.title,
 			artist: val.artist,
-			channel_name: val.channel_name,
+			channel_name: val.channel_name?val.channel_name:temp.channel_name,
 			current_time: 0,
 			duration: 0,
 			lyric: '',
@@ -54,10 +53,17 @@ export default {
 		let index = tmp.indexOf(words);
 		if(index != -1){
 			tmp.splice(index, 1);
-			tmp.unshift(words);
-		}else{
-			tmp.push(words);
 		}
+		tmp.unshift(words);
 		state.search_state.keywords = tmp;
 	},
+	clearSearchHistory: (state, words) => {
+		state.search_state.keywords = [];
+	},
+	updatePlayVolume: (state, val) => {
+		val += state.play_volume
+		if(val > 1) val = 1;
+		if(val < 0) val = 0;
+		state.play_volume = val;
+	}
 }

@@ -49,7 +49,6 @@
 	}
 	.scroller{
 		margin-top: 0.22rem;
-		padding-bottom: 0.6rem;
 		display: flex;
     	flex-wrap: wrap;
     	align-items: center;
@@ -58,8 +57,8 @@
     		padding-top: 0.14rem;
     	}
 
-		$loading_height:0.4rem;
-    	transform: translate3d(0px, -$loading_height, 0px);
+		$loading_height:40px;
+    	transform: translate3d(0px, -40px, 0px);
     	-webkit-overflow-scrolling:touch;
     	.loading{
 			font-size: 0.14rem;

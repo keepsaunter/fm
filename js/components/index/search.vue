@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<SearchInput @searchEvent="startSearch"></SearchInput>
+		<SearchInput @clearAutoCompleteAll="clearAutoCompleteAll" @searchEvent="startSearch" :search_history="search_history"></SearchInput>
 		<TopNavigation @selectChange="searchSelectChange" :data="search_classify"></TopNavigation>
 		<SearchResult></SearchResult>
 	</div>
@@ -22,9 +22,12 @@
 			},
 			searchSelectChange: function(select){
 				this.$store.commit('updateSearchSelect', select);
+			},
+			clearAutoCompleteAll: function(){
+				this.$store.commit('clearSearchHistory');
 			}
 		},
-		computed: mapGetters([ 'search_classify' ])
+		computed: mapGetters([ 'search_classify', 'search_history' ])
 	}
 </script>
 <style>

@@ -2,7 +2,7 @@
 	<div>
 		<TopNavigation @selectChange="selectChange" class="top-navigation" :data="home_top_navigation"></TopNavigation>
 		<TabContainer v-model="top_navi_selected">
-			<TabContainerItem v-for="item in home_top_navigation" :style="{height:(screen_height-17)/100+'rem'}" :id="item.id">
+			<TabContainerItem v-for="item in home_top_navigation" :style="{height:(screen_height-17)/100+'rem',overflowY:'scroll'}" :id="item.id">
 				<HomeContent v-if="item.id == 'artist'" key_name="artist" :data="home_artist"></HomeContent>
 				<HomeContent v-if="item.id == 'single'" key_name="single" :data="home_single"></HomeContent>
 				<HomeContent v-if="item.id == 'language'" key_name="language" :data="home_language"></HomeContent>

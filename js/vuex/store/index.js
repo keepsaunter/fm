@@ -16,6 +16,7 @@ const state = {
 	homepage_selected: StaticValue.state.home_top_navigation[0].id,
 	listeningSong:{
 		id: '',
+		sid: '',
 		res_url: '',
 		img_url: ResourcePath.state.img_earphone,
 		bk_img_url: '',
@@ -30,7 +31,8 @@ const state = {
 	search_state: {
 		select: StaticValue.state.search_classify[0].id,
 		keywords: [],
-	}
+	},
+	play_volume: 0.5,
 }
 
 export default new Vuex.Store({

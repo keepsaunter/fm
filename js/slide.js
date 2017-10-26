@@ -11,11 +11,10 @@ export default function (option) {
             isTouchPad = (/hp-tablet/gi).test(navigator.appVersion),
             hasTouch = 'ontouchstart' in window && !isTouchPad;
     var obj = document.querySelector(option.container);
-    var loading=obj.firstElementChild;
+    var loading=obj.firstChild;
     var loading_text_span=loading.firstChild;
     var loading_fragment=loading.lastChild;
-    // var offset=loading.clientHeight;
-    var offset=59;
+    var offset=loading.clientHeight;
     var objparent = obj.parentElement;
     /*操作方法*/
     var fn =
@@ -63,7 +62,7 @@ export default function (option) {
             isLock = true;
             isCanDo = true;
             //保存当前鼠标Y坐标
-            start = hasTouch ? even.touches[0].pageY : even.pageY;
+            start = hasTouch ? (even.touches?even.touches[0].pageY:0) : even.pageY;
             //消除滑块动画时间
             fn.setTransition(0);
             loading_text_span.style.display='inline';
@@ -71,7 +70,6 @@ export default function (option) {
         }
         return false;
     }
-
     //滑动中
     function move(e) {
         if (objparent.scrollTop <= 0 && isCanDo) {
@@ -84,7 +82,7 @@ export default function (option) {
                 fn.setTransition(0);
                 //移动滑块
                 if((end-start-offset)/2<=150) {
-                    length=(end - start - offset) / 2;
+                    length=(end - start - offset);
                     fn.translate(length);
                 }
                 else {
