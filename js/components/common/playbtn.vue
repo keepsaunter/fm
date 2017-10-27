@@ -3,8 +3,9 @@
 		<div class="start-btn-img-div">
 			<img style="width:100%;height:100%;" :src="listeningSong.img_url">
 		</div>
-		<div v-if="listeningSong.img_url!=img_earphone" class="start-btn-img-div-model" :style="{transform: 'rotate('+t_img_rotate_deg+'deg)'}">
-			<img style="width:100%;height:100%;" :src="img_music">
+		<!-- <div v-if="listeningSong.img_url!=img_earphone" class="start-btn-img-div-model" :style="{transform: 'rotate('+t_img_rotate_deg+'deg)'}"> -->
+		<div v-if="listeningSong.img_url!=img_earphone" class="start-btn-img-div-model">
+			<img style="width:100%;height:100%;" :src="listeningSong.is_listen?ico_pause:ico_start">
 		</div>
 		<svg class="circle_svg" width="100%" height="100%" version="1.1">
 			<circle cx="50%" cy="50%" r="32" stroke="red" stroke-width="2" fill="white" stroke-dasharray="201px" :stroke-dashoffset="stroke_dashoffset"/>
@@ -21,7 +22,7 @@
 		},
 		computed: {
 			...mapState(['listeningSong']),
-			...mapGetters(['img_music', 'img_earphone']),
+			...mapGetters(['img_music', 'img_earphone', 'ico_start', 'ico_pause']),
 			stroke_dashoffset: function(){
 				let total_length = 201;
 				let duration = this.$store.state.listeningSong.duration;

@@ -4,16 +4,17 @@
 			<TabContainerItem id="home">
 				<Home></Home>
 			</TabContainerItem>
-		  	<TabContainerItem id="search">
+		  	<TabContainerItem id="douban">
 		    	<Search></Search>
 		  	</TabContainerItem>
 		  	<TabContainerItem id="start">
 		    	<Listening></Listening>
 		  	</TabContainerItem>
-		  	<TabContainerItem id="mylisten">
-		    	<Cell v-for="n in 6" :title="'选项 ' + n" />
+		  	<TabContainerItem id="qqmus">
+		    	<!-- <Cell v-for="n in 6" :title="'选项 ' + n" /> -->
+		    	<Qqmus></Qqmus>
 		  	</TabContainerItem>
-		  	<TabContainerItem id="mine">
+		  	<TabContainerItem id="wangyi">
 		    	<Cell v-for="n in 6" :title="'选项 ' + n" />
 		  	</TabContainerItem>
 		</TabContainer>
@@ -26,6 +27,7 @@
 	import Home from './home';
 	import Search from './search';
 	import Listening from './listening';
+	import Qqmus from './qqmus';
 	import BottomNav from '../bottom_navigation';
 	export default {
 		components: {
@@ -35,7 +37,8 @@
 			Home,
 			Search,
 			Listening,
-			BottomNav
+			BottomNav,
+			Qqmus
 		},
 		filters:{
 			formatStr: function(str){

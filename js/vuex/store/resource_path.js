@@ -17,6 +17,8 @@ const state = {
 	ico_volume_bg: require('../../../static/ico/ico_volume_bg.png'),
 	ico_volume_sm: require('../../../static/ico/ico_volume_sm.png'),
 	ico_volume_no: require('../../../static/ico/ico_volume_no.png'),
+	ico_start: require('../../../static/ico/ico_start.png'),
+	ico_pause: require('../../../static/ico/ico_pause.png'),
 
 	img_earphone: require('../../../static/img/img_earphone.png'),
 	img_music: require('../../../static/img/img_music.png'),

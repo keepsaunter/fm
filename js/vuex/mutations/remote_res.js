@@ -44,5 +44,11 @@ export default {
 			url:state.search_music.url,
 			result_limit: state.search_music.result_limit
 		});
-	}
+	},
+	updateQqmusList: (state, data) => {
+		state.qqmus.datalist = data;
+	},
+	updateQqmusSearch: (state, data) => {
+		state.qqmus.datasearch = data;
+	},
 }

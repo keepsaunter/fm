@@ -66,5 +66,63 @@ export default {
 				context.dispatch('getMusicLyric', {sid: data.sid, ssid: data.ssid})
 			}
 		)
-	}
+	},
+	getQqmusAllList: (context) => {
+		let remote_config = context.state.qqmus;
+		context.dispatch('fetchJsonp',{url: remote_config.url_list,callback:function(res){
+			context.commit('updateQqmusList', res.songlist);
+		}});
+	},
+	getQqmusSearch: (context, keyword) => {
+		let remote_config = context.state.qqmus;
+		console.log(remote_config)
+		context.dispatch('fetchJsonp',{url: remote_config.url_search,params:{
+			ct:24,
+			qqmusic_ver:1298,
+			new_json:1,
+			remoteplace:'txt.yqq.center',
+			searchid:49286540795728270,
+			t:0,
+			aggr:1,
+			cr:1,
+			catZhida:1,
+			lossless:0,
+			flag_qc:0,
+			p:1,
+			n:20,
+			w:keyword,
+			g_tk:5381,
+			jsonpCallback:'searchCallbacksong9656',
+			loginUin:0,
+			hostUin:0,
+			format:'jsonp',
+			inCharset:'utf8',
+			outCharset:'utf-8',
+			notice:0,
+			platform:'yqq',
+			needNewCode:0,
+		},funkey:'searchCallbacksong9656',callback:function(res){
+			console.log(res);
+			context.commit('updateQqmusSearch', res.data.song);
+		}});
+	},
+	fetchJsonp: (context, config) => {
+		if(config.params){
+			if(config.url.indexOf('?') != -1)
+				config.url+="&"+urlEncode(config.params);
+			else config.url+="?"+urlEncode(config.params);
+		}
+		if(!config.funkey) config.funkey='JsonCallback';
+        var body = document.getElementsByTagName('body')[0];
+        //插入一个script
+        var script = document.createElement('script');
+        script.setAttribute('charset', config.charset?config.charset:'GBK');
+        script.setAttribute('src',config.url);
+        body.appendChild(script);
+        window[config.funkey]=function(tex){
+        	config.callback(tex);
+        	body.removeChild(script);
+        	window[config.funkey]=undefined;
+        }
+    }
 }

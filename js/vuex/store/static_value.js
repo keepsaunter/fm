@@ -10,10 +10,10 @@ const state = {
 	],
 	main_menu: [
 		{ title: "首页", id: "home"},
-		{ title: "搜索", id: "search"},
+		{ title: "豆瓣", id: "douban"},
 		{ title: "播放", id: "start"},
-		{ title: "我听", id: "mylisten"},
-		{ title: "我的", id: "mine"},
+		{ title: "QQ", id: "qqmus"},
+		{ title: "网易", id: "wangyi"},
 	],
 	search_classify: [
 		{ title: "全部", id: "all"},

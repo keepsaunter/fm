@@ -1,7 +1,7 @@
 <template>
 	<div class="listening-content-div">
 		<img :src="img_listen_bk" style="width:100%;">
-		<audio id="audio" ref="ref_fm_audio" @timeupdate="listenTimeUpdate" style="width:100%;height:46px;color:red !import" autoplay :src="listeningSong.res_url"></audio>
+		<audio ref="ref_fm_audio" @timeupdate="listenTimeUpdate" style="width:100%;height:46px;color:red !import" autoplay :src="listeningSong.res_url"></audio>
 		<div class="listening-detail-info-div">
 			<p style="font-size: 0.168rem;">{{listeningSong.title}}</p>
 			<p style="margin:0.06rem 0 0.2rem 0;">{{'—— '+listeningSong.artist+' ——'}}</p>
@@ -19,8 +19,16 @@
 		methods: {
 			listenTimeUpdate: function(){
 				let target = event.target;
-				this.$store.commit('updateListenDuration', target.duration);
-				this.$store.commit('updateListenCurrentTime', target.currentTime);
+				if(!target.duration || (target.duration > target.currentTime)){
+					this.$store.commit('updateListenDuration', target.duration);
+					this.$store.commit('updateListenCurrentTime', target.currentTime);
+				}else{
+					let self = this;
+					let timer_1 = setTimeout(function(){
+						self.$store.dispatch('getNextListen');
+						clearTimeout(timer_1);
+					}, 3000);
+				}
 			},
 		},
 		watch: {

@@ -1,8 +1,8 @@
 <template>
 	<div class="search-input-div">
-		<input @focus='serchInputTrigger' @blur='serchInputTrigger' v-model="search_input_val" placeholder="艺术家姓名" class="search-input-input" type="" name="">
+		<input @focus='serchInputTrigger' @blur='serchInputTrigger' v-model="search_input_val" placeholder="搜索关键字" class="search-input-input" type="" name="">
 		<Mbutton class="search-input-button" @click="searchBtnClick">搜索</Mbutton>
-		<AutoComplete @itemClick="autoCompItemClick" @clearAll="clearAutoCompleteAll" v-show="auto_complete_show" :data="search_history" class="auto-complete-component"></AutoComplete>
+		<AutoComplete @itemClick="autoCompItemClick" v-show="auto_complete_show" :data="search_history" class="auto-complete-component"></AutoComplete>
 	</div>
 </template>
 <script>
@@ -31,9 +31,6 @@
 				setTimeout(function(){
 					self.auto_complete_show = !self.auto_complete_show;
 				},0)
-			},
-			clearAutoCompleteAll: function(){
-				this.$emit('clearAutoCompleteAll');
 			},
 			autoCompItemClick: function(val){
 				this.search_input_val = val;

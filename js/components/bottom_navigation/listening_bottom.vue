@@ -74,6 +74,7 @@
 			top: -40px;
     		z-index: 8888;
     		opacity: 0;
+    		margin: auto;
 		}
 	}
 </style>

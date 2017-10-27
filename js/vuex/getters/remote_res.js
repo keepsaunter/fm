@@ -9,4 +9,6 @@ export default {
 	music_lyric_config: state => state.music_lyric_config,
 	rewrite_img_url: state => state.rewrite_img_url,
 	search_result_data: state => state.search_music.data,
+	qqmus_all_list: state => state.qqmus.datalist,
+	qqmus_data_search: state => state.qqmus.datasearch,
 }

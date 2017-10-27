@@ -21,7 +21,7 @@
 				this.$emit('itemClick', val);
 			},
 			clearAll: function(){
-				this.$emit('clearAll');
+				this.$store.commit('clearSearchHistory');
 			}
 		}
 	}

@@ -68,6 +68,12 @@ const state = {
 		url: json_bird_url+'https://douban.fm/j/v2/query/',
 		result_limit: 5,
 		data: {}
+	},
+	qqmus: {
+		url_list: 'http://music.qq.com/musicbox/shop/v3/data/hit/hit_all.js',
+		url_search: 'https://c.y.qq.com/soso/fcgi-bin/client_search_cp',
+		datalist: [],
+		datasearch: []
 	}
 }
 export default {
