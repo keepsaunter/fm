@@ -70,6 +70,7 @@ const state = {
 		data: {}
 	},
 	qqmus: {
+		search_res_limit: 20,
 		url_list: 'http://music.qq.com/musicbox/shop/v3/data/hit/hit_all.js',
 		url_search: 'https://c.y.qq.com/soso/fcgi-bin/client_search_cp',
 		datalist: [],

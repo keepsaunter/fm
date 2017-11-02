@@ -11,4 +11,5 @@ export default {
 	search_result_data: state => state.search_music.data,
 	qqmus_all_list: state => state.qqmus.datalist,
 	qqmus_data_search: state => state.qqmus.datasearch,
+	qqmus_search_has_more: state => !state.qqmus.datasearch.list||state.qqmus.datasearch.list&&(state.qqmus.datasearch.list.length >= state.qqmus.datasearch.totalnum),
 }

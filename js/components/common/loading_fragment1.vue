@@ -19,6 +19,7 @@
 		margin: 3px auto 0;
 	  	width: 150px;
 	  	text-align: center;
+	  	font-size: 0.14rem;
 	}
 	 
 	.spinner > div {

@@ -4,7 +4,10 @@ export default {
 		state.homepage_selected = val;
 	},
 	mainMenuSelectUpdate: (state, val) => {
-		state.main_menu_selected = val;
+		if(state.main_menu_selected != val){
+			state.main_menu_selected_pre=state.main_menu_selected;
+			state.main_menu_selected = val;
+		}
 	},
 	updateListening: (state, val) => {
 		let bk_img_url = rewriteImgUrl(val.picture);

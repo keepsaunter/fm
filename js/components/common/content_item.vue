@@ -60,10 +60,13 @@
 		font-size: 0.12rem;
 		margin-top: 0.1rem;
 
+		float: left;
 		overflow: hidden;
 		text-overflow: ellipsis;
 		display: -webkit-box;
 		-webkit-line-clamp: 1;
 		-webkit-box-orient: vertical;
+		text-align: center;
+		width: 100%;
 	}
 </style>

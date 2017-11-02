@@ -49,6 +49,10 @@ export default {
 		state.qqmus.datalist = data;
 	},
 	updateQqmusSearch: (state, data) => {
+		let data_pre = state.qqmus.datasearch;
+		if(data_pre.list&&data_pre.list.length){
+			data.list = data_pre.list.concat(data.list);
+		}
 		state.qqmus.datasearch = data;
 	},
 }

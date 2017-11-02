@@ -1,7 +1,11 @@
 <?php
 	// $url = $_GET['url'];
-	header("Content-type: text/html; charset=utf-8"); 
 	$temps = $_REQUEST;
+	if(isset($temps['charset'])){
+		header("Content-type: text/html; charset=".$temps['charset']); 
+	}else{
+		header("Content-type: text/html; charset=UTF-8");
+	}
 	$method = isset($temps['method']) ? $temps['method'] : 'get';
 	$url = $temps['url'];
 	$params = [];

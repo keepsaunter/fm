@@ -29,6 +29,7 @@
 		line-height: 0.3rem;
 		font-weight: 100;
 		border-bottom: 1px solid $theme_color_grey;
+		padding-left: 4px;
 		.more_ico_div{
 			background-size: contain;
     		width: 0.3rem;

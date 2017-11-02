@@ -72,6 +72,7 @@
 			position:absolute;
 			width: 80%;
 			top: -40px;
+			left: 10%;
     		z-index: 8888;
     		opacity: 0;
     		margin: auto;

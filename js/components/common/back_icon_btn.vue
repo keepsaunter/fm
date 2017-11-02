@@ -6,10 +6,10 @@
 <script>
 	import { mapGetters } from 'vuex';
 	export default {
-		computed: mapGetters([ 'ico_left_arrow' ]),
+		computed: mapGetters([ 'ico_left_arrow', 'main_menu_selected_pre' ]),
 		methods: {
 			backBtnClick: function(){
-				this.$store.commit('mainMenuSelectUpdate', 'home');
+				this.$store.commit('mainMenuSelectUpdate', this.main_menu_selected_pre);
 			}
 		}
 	}

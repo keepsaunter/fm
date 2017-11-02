@@ -49,6 +49,7 @@ export default {
 			}
 		)
 	},
+	//豆瓣下一曲
 	getNextListen: (context) => {
 		let listen_info_cofig = context.getters.listen_info;
 		let listening_song = context.rootState.listeningSong;
@@ -70,12 +71,24 @@ export default {
 	getQqmusAllList: (context) => {
 		let remote_config = context.state.qqmus;
 		context.dispatch('fetchJsonp',{url: remote_config.url_list,callback:function(res){
-			context.commit('updateQqmusList', res.songlist);
+			let song_list = res.songlist;
+			song_list.forEach(function(val, index, arr){
+				let album_id = val.albumId;
+				arr[index].img_url = 'http://imgcache.qq.com/music/photo/album_300/'+album_id%100+'/300_albumpic_'+album_id+'_0.jpg';
+			})
+			context.commit('updateQqmusList', song_list);
 		}});
 	},
-	getQqmusSearch: (context, keyword) => {
+	//data{type:"init/more",keyword: keyword}
+	getQqmusSearch: (context, data) => {
 		let remote_config = context.state.qqmus;
-		console.log(remote_config)
+		let res_limit = remote_config.search_res_limit;
+		let page = 1;
+		if(!data.type || data.type=="init"){
+			context.state.qqmus.datasearch = [];
+		}else{
+			page = remote_config.datasearch.curpage+1;
+		}
 		context.dispatch('fetchJsonp',{url: remote_config.url_search,params:{
 			ct:24,
 			qqmusic_ver:1298,
@@ -88,9 +101,9 @@ export default {
 			catZhida:1,
 			lossless:0,
 			flag_qc:0,
-			p:1,
-			n:20,
-			w:keyword,
+			p:page,
+			n:res_limit,
+			w:data.keyword,
 			g_tk:5381,
 			jsonpCallback:'searchCallbacksong9656',
 			loginUin:0,
@@ -102,8 +115,13 @@ export default {
 			platform:'yqq',
 			needNewCode:0,
 		},funkey:'searchCallbacksong9656',callback:function(res){
-			console.log(res);
+			let song_list = res.data.song.list;
+			song_list.forEach(function(val, index, arr){
+				let album_id = val.album.id;
+				arr[index].img_url = 'http://imgcache.qq.com/music/photo/album_300/'+album_id%100+'/300_albumpic_'+album_id+'_0.jpg';
+			})
 			context.commit('updateQqmusSearch', res.data.song);
+			context.commit('updateSearchKeyword', data.keyword);
 		}});
 	},
 	fetchJsonp: (context, config) => {
@@ -124,5 +142,17 @@ export default {
         	body.removeChild(script);
         	window[config.funkey]=undefined;
         }
+    },
+    qqmusGetmusicLyric(context, song_id){
+    	let data = {
+    		method:'post',
+    		url: 'http://music.qq.com/miniportal/static/lyric/'+song_id%100+'/'+song_id+'.xml',
+    		charset: 'gbk'
+    	};
+    	axios.post('backstage/cross_domain.php',urlEncode(data))
+			.then(function(res){
+				context.commit('updateListeningLyric', res.data);
+			}
+		)
     }
 }

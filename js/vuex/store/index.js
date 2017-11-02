@@ -13,6 +13,7 @@ Vue.use(Vuex);
 
 const state = {
 	main_menu_selected: StaticValue.state.main_menu[0].id,
+	main_menu_selected_pre: StaticValue.state.main_menu[0].id,
 	homepage_selected: StaticValue.state.home_top_navigation[0].id,
 	listeningSong:{
 		id: '',
