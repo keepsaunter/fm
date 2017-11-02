@@ -1,6 +1,6 @@
 #音乐播放器APP
 
-1. <h6>数据来源：`豆瓣`fm、qq音乐</h6>
+1. <h6>数据来源：<font color=blue>豆瓣fm、qq音乐</font></h6>
 2. 技术栈vue,vuex,mint-ui,webpack,scss,axios,APICloud云编译
 #访问地址（手机模式下查看）:http://23.105.220.94/fm/
 #app下载地址：
